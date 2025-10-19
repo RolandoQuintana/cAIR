@@ -12,12 +12,17 @@
   - _Requirements: 6.1, 6.2, 6.4, 6.5_
 
 - [ ] 2. Implement backend data models and database setup
-  - [ ] 2.1 Create Django models for ConciergeProject, Message, and ChecklistItem
+  - [x] 2.1 Create Django models for ConciergeProject, Message, and ChecklistItem
+
+
     - Define model fields, relationships, and constraints
     - Add model validation and string representations
     - _Requirements: 1.1, 2.1, 3.1_
   
-  - [ ] 2.2 Create and run database migrations
+  - [x] 2.2 Create and run database migrations
+
+
+
     - Generate initial migration files
     - Set up SQLite database configuration
     - _Requirements: 6.3_
@@ -27,23 +32,39 @@
     - Test cascade deletion behavior
     - _Requirements: 1.5, 2.4_
 
-- [ ] 3. Build REST API endpoints with Django REST Framework
-  - [ ] 3.1 Set up Django REST Framework and CORS configuration
+- [x] 3. Build REST API endpoints with Django REST Framework
+
+
+
+
+
+  - [x] 3.1 Set up Django REST Framework and CORS configuration
+
+
     - Install and configure DRF
     - Configure CORS headers for frontend communication
     - _Requirements: 6.4_
   
-  - [ ] 3.2 Create serializers for all models
+  - [x] 3.2 Create serializers for all models
+
+
     - Implement model serializers with proper field validation
     - Add custom serialization logic for nested relationships
     - _Requirements: 1.1, 2.1, 3.1_
   
-  - [ ] 3.3 Implement project management API endpoints
+  - [x] 3.3 Implement project management API endpoints
+
+
     - Create ViewSets for CRUD operations on ConciergeProject
     - Add progress calculation logic
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
   
-  - [ ] 3.4 Implement message and checklist API endpoints
+  - [x] 3.4 Implement message and checklist API endpoints
+
+
+
+
+
     - Create endpoints for message retrieval and creation
     - Create endpoints for checklist item management
     - _Requirements: 2.1, 2.4, 3.1, 3.2, 3.3_

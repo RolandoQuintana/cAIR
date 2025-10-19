@@ -33,8 +33,6 @@ services:
   db:
     image: alpine:latest
     command: /bin/sh -c "echo 'SQLite will be used as file-based database'"
-    volumes:
-      - ./cair_backend/db.sqlite3:/tmp/placeholder
 
 volumes:
   backend_data:
