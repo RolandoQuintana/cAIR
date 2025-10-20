@@ -110,13 +110,14 @@ export function ProjectDetail({ storyId, onBack }: ProjectDetailProps) {
   const story = state.currentStory!;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <div className="flex items-center mb-4">
           <button
             onClick={onBack}
-            className="mr-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="hidden sm:flex mr-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Back to dashboard"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -171,19 +172,19 @@ export function ProjectDetail({ storyId, onBack }: ProjectDetailProps) {
             ) : (
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="flex items-center space-x-4">
-                    <h1 className="text-3xl font-bold text-gray-900">{story.title}</h1>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 truncate">{story.title}</h1>
                     <button
                       onClick={() => setIsEditing(true)}
-                      className="text-gray-400 hover:text-gray-600 p-1"
+                      className="self-start sm:self-auto text-gray-400 hover:text-gray-600 p-1"
                       title="Edit story"
                     >
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                       </svg>
                     </button>
                   </div>
-                  <p className="text-gray-600 mt-1">{getStoryTypeDisplay(story.type)}</p>
+                  <p className="text-sm sm:text-base text-gray-600 mt-1">{getStoryTypeDisplay(story.type)}</p>
                 </div>
               </div>
             )}
@@ -191,21 +192,21 @@ export function ProjectDetail({ storyId, onBack }: ProjectDetailProps) {
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-gray-700">Overall Progress</span>
-            <span className="text-sm text-gray-600">{Math.round(story.progress * 100)}%</span>
+            <span className="text-xs sm:text-sm font-medium text-gray-700">Overall Progress</span>
+            <span className="text-xs sm:text-sm text-gray-600">{Math.round(story.progress * 100)}%</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-3">
+          <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3">
             <div
-              className="bg-blue-600 h-3 rounded-full transition-all duration-300"
+              className="bg-blue-600 h-2 sm:h-3 rounded-full transition-all duration-300"
               style={{ width: `${story.progress * 100}%` }}
             ></div>
           </div>
         </div>
 
         {/* Story Metadata */}
-        <div className="text-sm text-gray-600 mb-6">
+        <div className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 space-y-1">
           <p>Created: {formatDate(story.created_at)}</p>
           {story.updated_at !== story.created_at && (
             <p>Last updated: {formatDate(story.updated_at)}</p>
@@ -238,18 +239,18 @@ export function ProjectDetail({ storyId, onBack }: ProjectDetailProps) {
       )}
 
       {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 mb-8">
-        <nav className="-mb-px flex space-x-8">
+      <div className="border-b border-gray-200 mb-4 sm:mb-8">
+        <nav className="-mb-px flex">
           <button
             onClick={() => setViewMode('chat')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+            className={`flex-1 sm:flex-none py-3 px-4 sm:px-1 border-b-2 font-medium text-sm transition-colors ${
               viewMode === 'chat'
                 ? 'border-blue-500 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
-            <div className="flex items-center space-x-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center justify-center sm:justify-start space-x-2">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
               <span>Chat</span>
@@ -257,14 +258,14 @@ export function ProjectDetail({ storyId, onBack }: ProjectDetailProps) {
           </button>
           <button
             onClick={() => setViewMode('chapters')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+            className={`flex-1 sm:flex-none py-3 px-4 sm:px-1 sm:ml-8 border-b-2 font-medium text-sm transition-colors ${
               viewMode === 'chapters'
                 ? 'border-blue-500 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
           >
-            <div className="flex items-center space-x-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center justify-center sm:justify-start space-x-2">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
               <span>Chapters</span>
@@ -274,7 +275,7 @@ export function ProjectDetail({ storyId, onBack }: ProjectDetailProps) {
       </div>
 
       {/* Content Area */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200" style={{ height: '600px' }}>
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 h-[500px] sm:h-[600px] lg:h-[700px]">
         {viewMode === 'chat' ? (
           <ChatInterface storyId={story.id} />
         ) : (

@@ -78,21 +78,24 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex justify-between items-center">
+      <div className="mb-6 sm:mb-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Your Stories</h1>
-            <p className="mt-2 text-gray-600">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Your Stories</h1>
+            <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
               Manage your AI concierge stories and track your progress
             </p>
           </div>
           <button
             onClick={() => setShowCreateForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
           >
-            New Story
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span>New Story</span>
           </button>
         </div>
       </div>
@@ -123,9 +126,9 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
 
       {/* Create Story Form Modal */}
       {showCreateForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Create New Story</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Create New Story</h2>
             <form onSubmit={handleCreateStory}>
               <div className="mb-4">
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
@@ -184,25 +187,25 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
 
       {/* Loading State */}
       {state.loading && state.stories.length === 0 && (
-        <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading stories...</p>
+        <div className="text-center py-8 sm:py-12">
+          <div className="inline-block animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600">Loading stories...</p>
         </div>
       )}
 
       {/* Empty State */}
       {!state.loading && state.stories.length === 0 && !state.error && (
-        <div className="text-center py-12">
-          <div className="mx-auto h-24 w-24 text-gray-400 mb-4">
+        <div className="text-center py-8 sm:py-12 px-4">
+          <div className="mx-auto h-16 w-16 sm:h-24 sm:w-24 text-gray-400 mb-4">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No stories yet</h3>
-          <p className="text-gray-600 mb-6">Get started by creating your first AI concierge story</p>
+          <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">No stories yet</h3>
+          <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto">Get started by creating your first AI concierge story</p>
           <button
             onClick={() => setShowCreateForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
           >
             Create Your First Story
           </button>
@@ -211,28 +214,28 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
 
       {/* Stories Grid */}
       {state.stories.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {state.stories.map((story) => (
             <div
               key={story.id}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+              className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 hover:scale-[1.02]"
             >
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 truncate">
                       {story.title}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       {getStoryTypeDisplay(story.type)}
                     </p>
                   </div>
                   <button
                     onClick={() => handleDeleteStory(story.id, story.title)}
-                    className="text-gray-400 hover:text-red-600 transition-colors"
+                    className="flex-shrink-0 ml-2 p-1 text-gray-400 hover:text-red-600 transition-colors"
                     title="Delete story"
                   >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9zM4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 012 0v4a1 1 0 11-2 0V9zm4 0a1 1 0 012 0v4a1 1 0 11-2 0V9z" clipRule="evenodd" />
                     </svg>
                   </button>
@@ -241,8 +244,8 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
                 {/* Progress Bar */}
                 <div className="mb-4">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">Progress</span>
-                    <span className="text-sm text-gray-600">{Math.round(story.progress * 100)}%</span>
+                    <span className="text-xs sm:text-sm font-medium text-gray-700">Progress</span>
+                    <span className="text-xs sm:text-sm text-gray-600">{Math.round(story.progress * 100)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
@@ -253,7 +256,7 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
                 </div>
 
                 {/* Story Info */}
-                <div className="text-sm text-gray-600 mb-4">
+                <div className="text-xs sm:text-sm text-gray-600 mb-4 space-y-1">
                   <p>Created: {formatDate(story.created_at)}</p>
                   {story.updated_at !== story.created_at && (
                     <p>Updated: {formatDate(story.updated_at)}</p>
@@ -263,7 +266,7 @@ export function Dashboard({ onStorySelect }: DashboardProps) {
                 {/* Action Button */}
                 <button
                   onClick={() => onStorySelect(story.id)}
-                  className="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors"
+                  className="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Open Story
                 </button>

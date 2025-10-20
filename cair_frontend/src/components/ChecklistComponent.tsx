@@ -77,24 +77,27 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900">Story Chapters</h2>
+      <div className="p-4 sm:p-6 border-b border-gray-200">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mb-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Story Chapters</h2>
           <button
             onClick={() => setShowAddForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm font-medium transition-colors"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
           >
-            Add Chapter
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Add Chapter</span>
           </button>
         </div>
 
         {/* Progress Summary */}
         <div className="mb-4">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-gray-700">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-1 sm:space-y-0 mb-2">
+            <span className="text-xs sm:text-sm font-medium text-gray-700">
               Progress: {progress.completed} of {progress.total} completed
             </span>
-            <span className="text-sm text-gray-600">{progress.percentage}%</span>
+            <span className="text-xs sm:text-sm text-gray-600">{progress.percentage}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
@@ -131,7 +134,7 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
 
       {/* Add Chapter Form */}
       {showAddForm && (
-        <div className="mx-6 mt-4 bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <div className="mx-4 sm:mx-6 mt-4 bg-gray-50 border border-gray-200 rounded-lg p-4">
           <h3 className="text-sm font-medium text-gray-900 mb-3">Add New Chapter</h3>
           <form onSubmit={handleAddChapter}>
             <div className="mb-3">
@@ -181,30 +184,30 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
       )}
 
       {/* Chapters */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
         {/* Loading State */}
         {chapterState.loading && chapterState.chapters.length === 0 && (
-          <div className="text-center py-8">
-            <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-            <p className="mt-2 text-gray-600">Loading chapters...</p>
+          <div className="text-center py-6 sm:py-8">
+            <div className="inline-block animate-spin rounded-full h-5 w-5 sm:h-6 sm:w-6 border-b-2 border-blue-600"></div>
+            <p className="mt-2 text-sm sm:text-base text-gray-600">Loading chapters...</p>
           </div>
         )}
 
         {/* Empty State */}
         {!chapterState.loading && chapterState.chapters.length === 0 && (
-          <div className="text-center py-12">
-            <div className="mx-auto h-16 w-16 text-gray-400 mb-4">
+          <div className="text-center py-8 sm:py-12 px-4">
+            <div className="mx-auto h-12 w-12 sm:h-16 sm:w-16 text-gray-400 mb-4">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No chapters yet</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">No chapters yet</h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-sm mx-auto">
               Start chatting with your AI concierge to get personalized recommendations and chapters.
             </p>
             <button
               onClick={() => setShowAddForm(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
             >
               Add Your First Chapter
             </button>
@@ -213,11 +216,11 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
 
         {/* Chapters List */}
         {chapterState.chapters.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {chapterState.chapters.map((chapter) => (
               <div
                 key={chapter.id}
-                className={`flex items-start space-x-3 p-4 rounded-lg border transition-colors ${
+                className={`flex items-start space-x-3 p-3 sm:p-4 rounded-lg border transition-colors ${
                   chapter.completed
                     ? 'bg-green-50 border-green-200'
                     : 'bg-white border-gray-200 hover:border-gray-300'
@@ -226,7 +229,7 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
                 {/* Checkbox */}
                 <button
                   onClick={() => handleToggleChapter(chapter)}
-                  className={`flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
+                  className={`flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors touch-manipulation ${
                     chapter.completed
                       ? 'bg-green-600 border-green-600 text-white'
                       : 'border-gray-300 hover:border-gray-400'
@@ -241,7 +244,7 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h4 className={`text-sm font-medium ${
+                  <h4 className={`text-sm font-medium break-words ${
                     chapter.completed
                       ? 'text-green-800 line-through'
                       : 'text-gray-900'
@@ -249,7 +252,7 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
                     {chapter.title}
                   </h4>
                   {chapter.description && (
-                    <p className={`text-sm mt-1 ${
+                    <p className={`text-sm mt-1 break-words ${
                       chapter.completed
                         ? 'text-green-700 line-through'
                         : 'text-gray-600'
@@ -261,7 +264,7 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
                     <p className="text-xs text-gray-500">
                       Added {formatDate(chapter.created_at)}
                       {chapter.updated_at !== chapter.created_at && (
-                        <span> • Updated {formatDate(chapter.updated_at)}</span>
+                        <span className="hidden sm:inline"> • Updated {formatDate(chapter.updated_at)}</span>
                       )}
                     </p>
                   </div>
@@ -271,7 +274,7 @@ export function ChecklistComponent({ storyId }: ChecklistComponentProps) {
                 <div className="flex-shrink-0">
                   <button
                     onClick={() => handleDeleteChapter(chapter)}
-                    className="text-gray-400 hover:text-red-600 transition-colors p-1"
+                    className="text-gray-400 hover:text-red-600 transition-colors p-1 touch-manipulation"
                     title="Delete chapter"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
