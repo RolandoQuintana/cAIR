@@ -1,29 +1,46 @@
+import { useState } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { AppProviders } from './contexts/index'
+import { Dashboard } from './components/Dashboard'
+import { ProjectDetail } from './components/ProjectDetail'
 
 function App() {
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+
+  const handleProjectSelect = (projectId: number) => {
+    setSelectedProjectId(projectId);
+  };
+
+  const handleBackToDashboard = () => {
+    setSelectedProjectId(null);
+  };
+
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-6">
-              <h1 className="text-3xl font-bold text-gray-900">cAir</h1>
-              <p className="text-gray-600">AI Concierge MVP</p>
+    <AppProviders>
+      <Router>
+        <div className="min-h-screen bg-gray-50">
+          <header className="bg-white shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center py-6">
+                <h1 className="text-3xl font-bold text-gray-900">cAir</h1>
+                <p className="text-gray-600">AI Concierge MVP</p>
+              </div>
             </div>
-          </div>
-        </header>
-        
-        <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-gray-500 text-lg">
-                cAir frontend is ready for development!
-              </p>
-            </div>
-          </div>
-        </main>
-      </div>
-    </Router>
+          </header>
+          
+          <main>
+            {selectedProjectId ? (
+              <ProjectDetail 
+                projectId={selectedProjectId} 
+                onBack={handleBackToDashboard} 
+              />
+            ) : (
+              <Dashboard onProjectSelect={handleProjectSelect} />
+            )}
+          </main>
+        </div>
+      </Router>
+    </AppProviders>
   )
 }
 
